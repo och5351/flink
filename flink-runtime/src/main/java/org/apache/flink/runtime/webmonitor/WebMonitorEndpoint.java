@@ -1220,6 +1220,18 @@ public class WebMonitorEndpoint<T extends RestfulGateway> extends RestServerEndp
         handlers.add(
                 Tuple2.of(jobRescaleDetailsHandler.getMessageHeaders(), jobRescaleDetailsHandler));
 
+        final JobRescalesHistoryHandler jobRescalesHistoryHandler =
+                new JobRescalesHistoryHandler(
+                        leaderRetriever,
+                        timeout,
+                        responseHeaders,
+                        JobRescalesHistoryHeaders.getInstance(),
+                        executionGraphCache,
+                        executor);
+        handlers.add(
+                Tuple2.of(
+                        jobRescalesHistoryHandler.getMessageHeaders(), jobRescalesHistoryHandler));
+
         final JobRescalesOverviewHandler jobRescalesOverviewHandler =
                 new JobRescalesOverviewHandler(
                         leaderRetriever,

@@ -129,8 +129,8 @@ public class DefaultRescaleTimeline implements RescaleTimeline {
         List<Rescale> rescales = rescaleHistory.toArrayList();
         Collections.reverse(rescales);
         return new RescalesStatsSnapshot(
-                Collections.unmodifiableList(rescales),
-                Collections.unmodifiableMap(latestRescales),
+                List.copyOf(rescales),
+                Map.copyOf(latestRescales),
                 rescalesSummary.createSnapshot());
     }
 
