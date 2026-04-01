@@ -100,6 +100,8 @@ class JobRescalesOverviewHandlerTest {
                 new ExecutionGraphInfo(
                         new ArchivedExecutionGraphBuilder().build(),
                         Collections.emptyList(),
+                        null,
+                        null,
                         rescalesStatsSnapshot);
         final HandlerRequest<EmptyRequestBody> request =
                 createRequest(executionGraphInfo.getJobId());

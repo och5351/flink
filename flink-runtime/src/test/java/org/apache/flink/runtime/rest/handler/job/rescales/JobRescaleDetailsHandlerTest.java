@@ -91,6 +91,8 @@ class JobRescaleDetailsHandlerTest {
                 new ExecutionGraphInfo(
                         new ArchivedExecutionGraphBuilder().build(),
                         Collections.emptyList(),
+                        null,
+                        null,
                         RescalesStatsSnapshot.emptySnapshot());
         assertThatThrownBy(
                         () ->
@@ -144,6 +146,8 @@ class JobRescaleDetailsHandlerTest {
                 new ExecutionGraphInfo(
                         new ArchivedExecutionGraphBuilder().build(),
                         Collections.emptyList(),
+                        null,
+                        null,
                         new RescalesStatsSnapshot(
                                 Collections.singletonList(rescale),
                                 Collections.singletonMap(rescale.getTerminalState(), rescale),

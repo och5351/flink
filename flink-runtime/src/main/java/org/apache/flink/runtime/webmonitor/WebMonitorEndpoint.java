@@ -96,8 +96,8 @@ import org.apache.flink.runtime.rest.handler.job.metrics.JobVertexMetricsHandler
 import org.apache.flink.runtime.rest.handler.job.metrics.JobVertexWatermarksHandler;
 import org.apache.flink.runtime.rest.handler.job.metrics.SubtaskMetricsHandler;
 import org.apache.flink.runtime.rest.handler.job.metrics.TaskManagerMetricsHandler;
-import org.apache.flink.runtime.rest.handler.job.rescales.JobRescaleDetailsHandler;
 import org.apache.flink.runtime.rest.handler.job.rescales.JobRescaleConfigHandler;
+import org.apache.flink.runtime.rest.handler.job.rescales.JobRescaleDetailsHandler;
 import org.apache.flink.runtime.rest.handler.job.rescales.JobRescalesHistoryHandler;
 import org.apache.flink.runtime.rest.handler.job.rescales.JobRescalesOverviewHandler;
 import org.apache.flink.runtime.rest.handler.job.rescales.JobRescalesSummaryHandler;
@@ -167,8 +167,8 @@ import org.apache.flink.runtime.rest.messages.job.SubtaskCurrentAttemptDetailsHe
 import org.apache.flink.runtime.rest.messages.job.SubtaskExecutionAttemptAccumulatorsHeaders;
 import org.apache.flink.runtime.rest.messages.job.SubtaskExecutionAttemptDetailsHeaders;
 import org.apache.flink.runtime.rest.messages.job.coordination.ClientCoordinationHeaders;
-import org.apache.flink.runtime.rest.messages.job.rescales.JobRescaleDetailsHeaders;
 import org.apache.flink.runtime.rest.messages.job.rescales.JobRescaleConfigHeaders;
+import org.apache.flink.runtime.rest.messages.job.rescales.JobRescaleDetailsHeaders;
 import org.apache.flink.runtime.rest.messages.job.rescales.JobRescalesHistoryHeaders;
 import org.apache.flink.runtime.rest.messages.job.rescales.JobRescalesOverviewHeaders;
 import org.apache.flink.runtime.rest.messages.job.rescales.JobRescalesSummaryHeaders;
@@ -1219,18 +1219,6 @@ public class WebMonitorEndpoint<T extends RestfulGateway> extends RestServerEndp
                         executor);
         handlers.add(
                 Tuple2.of(jobRescaleDetailsHandler.getMessageHeaders(), jobRescaleDetailsHandler));
-
-        final JobRescalesHistoryHandler jobRescalesHistoryHandler =
-                new JobRescalesHistoryHandler(
-                        leaderRetriever,
-                        timeout,
-                        responseHeaders,
-                        JobRescalesHistoryHeaders.getInstance(),
-                        executionGraphCache,
-                        executor);
-        handlers.add(
-                Tuple2.of(
-                        jobRescalesHistoryHandler.getMessageHeaders(), jobRescalesHistoryHandler));
 
         final JobRescalesOverviewHandler jobRescalesOverviewHandler =
                 new JobRescalesOverviewHandler(
