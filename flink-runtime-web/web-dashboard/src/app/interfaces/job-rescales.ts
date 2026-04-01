@@ -16,6 +16,76 @@
  * limitations under the License.
  */
 
+export type RescalesHistories = RescalesHistory[];
+
+export interface RescalesHistory {
+  rescaleUuid: string;
+  resourceRequirementsUuid: string;
+  rescaleAttemptId: number;
+  vertices: object;
+  slots: object;
+  schedulerStates: unknown[];
+  startTimestampInMillis: number;
+  endTimestampInMillis: number;
+  terminalState: string;
+  triggerCause: string;
+  terminatedReason: string;
+  expand?: boolean;
+}
+
+export interface RescalesDetailHistory {
+  rescaleUuid: string;
+  resourceRequirementsUuid: string;
+  rescaleAttemptId: number;
+  vertices: { [vertexId: string]: RescaleVertex };
+  slots: { [slotSharingGroupId: string]: RescaleSlot };
+  schedulerStates: SchedulerState[];
+  startTimestampInMillis: number;
+  endTimestampInMillis: number;
+  terminalState: string;
+  triggerCause: string;
+  terminatedReason: string;
+}
+
+export interface RescaleVertex {
+  jobVertexId: string;
+  jobVertexName: string;
+  slotSharingGroupId: string;
+  slotSharingGroupName: string;
+  desiredParallelism: number;
+  sufficientParallelism: number;
+  preRescaleParallelism: number;
+  postRescaleParallelism: number;
+}
+
+export interface RescaleSlot {
+  slotSharingGroupId: string;
+  slotSharingGroupName: string;
+  requestResourceProfile: ResourceProfile;
+  desiredSlots: number;
+  minimalRequiredSlots: number;
+  preRescaleSlots: number;
+  postRescaleSlots: number;
+  acquiredResourceProfile: ResourceProfile;
+}
+
+export interface ResourceProfile {
+  cpuCores: number;
+  taskHeapMemory: number;
+  taskOffHeapMemory: number;
+  managedMemory: number;
+  networkMemory: number;
+  extendedResources: { [key: string]: unknown };
+}
+
+export interface SchedulerState {
+  state: string;
+  enterTimestampInMillis: number;
+  leaveTimestampInMillis: number;
+  durationInMillis: number;
+  stringifiedException: string;
+}
+
 export interface RescalesConfig {
   rescaleHistoryMax: number;
   schedulerExecutionMode: string;
